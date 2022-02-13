@@ -1,0 +1,14 @@
+bin/
+gen/
+.gradle/
+.idea/
+build/
+local.properties
+import-summary.txt
+Thumbs.db
+*.iml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/datasources.xml
+.idea/dataSources.ids
+.idea/libraries
