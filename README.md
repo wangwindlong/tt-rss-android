@@ -33,3 +33,7 @@ Copyright (c) 2011 Andrew Dolgov (unless explicitly stated otherwise).
 ## See also
 
 * Forum: http://tt-rss.org/forum
+* web code: https://github.com/wangwindlong/ttrss
+* official install guide: https://tt-rss.org/wiki/InstallationNotes
+* origin android code: https://git.tt-rss.org/fox/tt-rss-android
+* origin web code: https://git.tt-rss.org/fox/tt-rss/src/branch/master
