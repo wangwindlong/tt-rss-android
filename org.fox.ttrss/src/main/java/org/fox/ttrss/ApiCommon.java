@@ -169,9 +169,7 @@ public class ApiCommon {
                 builder.addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY));
 //                builder.addInterceptor(getLogGenerator());
             }
-            OkHttpClient mOkHttpClient = builder.build();
-
-            Response response = mOkHttpClient
+            Response response = builder.build()
                     .newCall(request)
                     .execute();
 
