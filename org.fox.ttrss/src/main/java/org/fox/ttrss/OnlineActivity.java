@@ -268,12 +268,12 @@ public class OnlineActivity extends CommonActivity {
 	}
 
 	protected void checkUpdates() {
-		if (BuildConfig.DEBUG || BuildConfig.ENABLE_UPDATER) {
-			new AppUpdater(this)
-					.setUpdateFrom(UpdateFrom.JSON)
-					.setUpdateJSON(String.format("https://srv.tt-rss.org/fdroid/updates/%1$s.json", this.getPackageName()))
-					.start();
-		}
+//		if (BuildConfig.DEBUG || BuildConfig.ENABLE_UPDATER) {
+//			new AppUpdater(this)
+//					.setUpdateFrom(UpdateFrom.JSON)
+//					.setUpdateJSON(String.format("https://srv.tt-rss.org/fdroid/updates/%1$s.json", this.getPackageName()))
+//					.start();
+//		}
 	}
 
 	protected void switchOffline() {
@@ -368,14 +368,20 @@ public class OnlineActivity extends CommonActivity {
 
 		if (BuildConfig.ENABLE_TRIAL && !BuildConfig.DEBUG) {
 			String testLabSetting = Settings.System.getString(getContentResolver(), "firebase.test.lab");
-
 			if ("true".equals(testLabSetting)) {
 				SharedPreferences.Editor editor = m_prefs.edit();
-				editor.putString("ttrss_url", "https://srv.tt-rss.org/tt-rss");
-				editor.putString("login", "demo");
-				editor.putString("password", "demo");
+				editor.putString("ttrss_url", "http://note.wangyl.net/ttrss");
+				editor.putString("login", "test");
+				editor.putString("password", "123456");
 				editor.apply();
 			}
+//			if ("true".equals(testLabSetting)) {
+//				SharedPreferences.Editor editor = m_prefs.edit();
+//				editor.putString("ttrss_url", "https://srv.tt-rss.org/tt-rss");
+//				editor.putString("login", "demo");
+//				editor.putString("password", "demo");
+//				editor.apply();
+//			}
 		}
 
 		if (m_prefs.getString("ttrss_url", "").trim().length() == 0) {

@@ -659,41 +659,41 @@ public class HeadlinesFragment extends StateSavedFragment {
 
 			HashMap<String,String> map = new HashMap<String,String>();
 			map.put("op", "getHeadlines");
-			map.put("sid", sessionId);
-			map.put("feed_id", String.valueOf(m_feed.id));
+			map.put("sid", sessionId); //tktb7mgjavsn1f1topki9tka5j
+			map.put("feed_id", String.valueOf(m_feed.id)); //-1
 			map.put("show_excerpt", "true");
-			map.put("excerpt_length", String.valueOf(CommonActivity.EXCERPT_MAX_LENGTH));
+			map.put("excerpt_length", String.valueOf(CommonActivity.EXCERPT_MAX_LENGTH)); //256
 			map.put("show_content", "true");
 			map.put("include_attachments", "true");
-			map.put("view_mode", m_activity.getViewMode());
-			map.put("limit", m_prefs.getString("headlines_request_size", "15"));
+			map.put("view_mode", m_activity.getViewMode()); //adaptive
+			map.put("limit", m_prefs.getString("headlines_request_size", "15")); //15
 			map.put("offset", String.valueOf(0));
-			map.put("skip", String.valueOf(fskip));
+			map.put("skip", String.valueOf(fskip)); //0
 			map.put("include_nested", "true");
 			map.put("has_sandbox", "true");
-			map.put("order_by", m_activity.getSortMode());
+			map.put("order_by", m_activity.getSortMode()); //default
 
-			if (m_prefs.getBoolean("enable_image_downsampling", false)) {
+			if (m_prefs.getBoolean("enable_image_downsampling", false)) {//false
 				if (m_prefs.getBoolean("always_downsample_images", false) || !m_activity.isWifiConnected()) {
 					map.put("resize_width", String.valueOf(m_activity.getResizeWidth()));
 				}
 			}
 
-			if (isCat) map.put("is_cat", "true");
+			if (isCat) map.put("is_cat", "true"); //false
 
-			if (allowForceUpdate) {
+			if (allowForceUpdate) { //false
 				map.put("force_update", "true");
 			}
 
-			if (m_searchQuery != null && m_searchQuery.length() != 0) {
+			if (m_searchQuery != null && m_searchQuery.length() != 0) { //false
 				map.put("search", m_searchQuery);
 				map.put("search_mode", "");
 				map.put("match_on", "both");
 			}
 
-			if (m_firstId > 0) map.put("check_first_id", String.valueOf(m_firstId));
+			if (m_firstId > 0) map.put("check_first_id", String.valueOf(m_firstId)); //false
 
-			if (m_activity.getApiLevel() >= 12) {
+			if (m_activity.getApiLevel() >= 12) { //true
 				map.put("include_header", "true");
 			}
 

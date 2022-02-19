@@ -6,6 +6,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Handler;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -15,16 +17,22 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Locale;
 
 import androidx.annotation.NonNull;
+
+import org.fox.ttrss.util.JsonUtil;
+
 import okhttp3.Credentials;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 public class ApiCommon {
     public static final String TAG = "ApiCommon";
@@ -98,6 +106,26 @@ public class ApiCommon {
         return networkInfo != null && networkInfo.isConnected();
     }
 
+
+
+    private static HttpLoggingInterceptor getLogGenerator() {
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(
+                message -> {
+                    try {
+                        Log.d("RetroLog", URLDecoder.decode(JsonUtil.decodeUnicode(message), StandardCharsets.UTF_8.toString()));
+//                        LOGD("RetroLog", message);
+                    } catch (IllegalArgumentException e2) {
+                        e2.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }  catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        return loggingInterceptor;
+    }
+
     static JsonElement performRequest(Context context, @NonNull HashMap<String, String> m_params,
                                       @NonNull ApiCommon.ApiCaller caller) {
         try {
@@ -133,7 +161,15 @@ public class ApiCommon {
 
             Request request = requestBuilder.build();
 
-            Response response = new OkHttpClient()
+//            Dispatcher dispatcher = new Dispatcher();
+//            dispatcher.setMaxRequests(3);
+//            dispatcher.setMaxRequestsPerHost(3);
+            OkHttpClient.Builder builder = new OkHttpClient.Builder();//.dispatcher(dispatcher);
+            if(BuildConfig.DEBUG) {
+                builder.addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY));
+//                builder.addInterceptor(getLogGenerator());
+            }
+            Response response = builder.build()
                     .newCall(request)
                     .execute();
 
