@@ -99,6 +99,9 @@ import java.util.concurrent.TimeUnit;
 import icepick.State;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
+/**
+ * 文章列表，展示最新的文章
+ */
 public class HeadlinesFragment extends StateSavedFragment {
 
 	public enum ArticlesSelection { ALL, NONE, UNREAD }

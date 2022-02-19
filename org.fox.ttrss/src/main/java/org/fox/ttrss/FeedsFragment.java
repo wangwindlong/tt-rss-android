@@ -50,6 +50,9 @@ import androidx.loader.content.Loader;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import icepick.State;
 
+/**
+ * 侧滑栏的 所有订阅源列表 enable_cats = false时加载
+ */
 public class FeedsFragment extends BaseFeedlistFragment implements OnItemClickListener, OnSharedPreferenceChangeListener,
 		LoaderManager.LoaderCallbacks<JsonElement> {
 	private final String TAG = this.getClass().getSimpleName();
