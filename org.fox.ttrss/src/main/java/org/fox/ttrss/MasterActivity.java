@@ -35,6 +35,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import icepick.State;
 
+//主页面，显示星标文章列表
 public class MasterActivity extends OnlineActivity implements HeadlinesEventListener {
 	private final String TAG = this.getClass().getSimpleName();
 	
@@ -265,22 +266,17 @@ public class MasterActivity extends OnlineActivity implements HeadlinesEventList
 		}		
 	}
 
+	//订阅源点击，跳转到对应源下所有的文章列表
     public void onFeedSelected(Feed feed) {
         onFeedSelected(feed, true);
     }
 
 	public void onFeedSelected(final Feed feed, final boolean selectedByUser) {
-
 		FeedsFragment ff = (FeedsFragment) getSupportFragmentManager().findFragmentByTag(FRAG_FEEDS);
-
 		if (ff != null && ff.isAdded()) {
 			ff.setSelectedfeed(feed);
 		}
-
-		if (m_drawerLayout != null) {
-			m_drawerLayout.closeDrawers();
-		}
-
+		if (m_drawerLayout != null) m_drawerLayout.closeDrawers();
 		new Handler().postDelayed(new Runnable() {
 			@Override
 			public void run() {
@@ -301,24 +297,20 @@ public class MasterActivity extends OnlineActivity implements HeadlinesEventList
 		}, 250);
 
         Date date = new Date();
-
         if (date.getTime() - m_lastRefresh > 30*1000) {
             m_lastRefresh = date.getTime();
             refresh(false);
         }
 	}
-	
+
+	//分类点击，跳转到这个分类的所有文章
 	public void onCatSelected(FeedCategory cat, boolean openAsFeed) {
 		FeedCategoriesFragment fc = (FeedCategoriesFragment) getSupportFragmentManager().findFragmentByTag(FRAG_CATS);
-		
 		//m_pullToRefreshAttacher.setRefreshing(true);
-		
 		if (!openAsFeed) {
-			
 			if (fc != null && fc.isAdded()) {
 				fc.setSelectedCategory(null);
 			}
-
 			FragmentTransaction ft = getSupportFragmentManager()
 					.beginTransaction();
 
@@ -334,11 +326,11 @@ public class MasterActivity extends OnlineActivity implements HeadlinesEventList
 			//m_actionbarRevertDepth = m_actionbarRevertDepth + 1;
 
 		} else {
-			
 			if (fc != null) {
 				fc.setSelectedCategory(cat);
 			}
 
+			//选中某个feed 跳转headlines界面，
 			Feed feed = new Feed(cat.id, cat.title, true);
 			onFeedSelected(feed);
 		}
@@ -351,7 +343,6 @@ public class MasterActivity extends OnlineActivity implements HeadlinesEventList
     @Override
     public void logout() {
         super.logout();
-
         finish();
     }
 

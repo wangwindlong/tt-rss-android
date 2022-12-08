@@ -448,30 +448,23 @@ public class FeedCategoriesFragment extends BaseFeedlistFragment implements OnIt
 	@Override
 	public void onItemClick(AdapterView<?> av, View view, int position, long id) {
 		ListView list = (ListView)av;
-		
 		Log.d(TAG, "onItemClick=" + position);
-		
 		if (list != null) {
-
 			FeedCategory cat = (FeedCategory)list.getItemAtPosition(position);
-
 			m_selectedCat = null;
 			m_adapter.notifyDataSetChanged();
-
 			if (cat != null) {
 				if (cat.id < 0) {
 					m_activity.onCatSelected(cat, false);
 				} else {
 					m_activity.onCatSelected(cat);
 				}
-
 			}
 		}
 	}
 
 	public void setSelectedCategory(FeedCategory cat) {	
 		m_selectedCat = cat;
-		
 		if (m_adapter != null) {
 			m_adapter.notifyDataSetChanged();
 		}

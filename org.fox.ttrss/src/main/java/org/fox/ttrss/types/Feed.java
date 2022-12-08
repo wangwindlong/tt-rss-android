@@ -3,9 +3,10 @@ package org.fox.ttrss.types;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+//订阅源
 public class Feed implements Comparable<Feed>, Parcelable {
 	public String feed_url;
-	public String title;
+	public String title; //is_cat = true 时为所属分类名称
 	public int id;
 	public int unread;
 	public boolean has_icon;

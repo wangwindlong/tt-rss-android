@@ -55,28 +55,28 @@ public class HeadlinesRequest extends ApiRequest {
 					final List<Article> articles;
 					final JsonObject header;
 
-					if (m_activity.getApiLevel() >= 12) {
-						header = content.get(0).getAsJsonObject();
-
-						//Log.d(TAG, "headerID:" + header.get("top_id_changed"));
-
-						m_firstIdChanged = header.get("first_id_changed") != null;
-						try {
-							m_firstId = header.get("first_id").getAsInt();
-						} catch (NumberFormatException e) {
-							m_firstId = 0;
-						}
-
-						Log.d(TAG, "firstID=" + m_firstId + " firstIdChanged=" + m_firstIdChanged);
-
-						Type listType = new TypeToken<List<Article>>() {}.getType();
-						articles = new Gson().fromJson(content.get(1), listType);
-					} else {
-						header = null;
+//					if (m_activity.getApiLevel() >= 12) {
+//						header = content.get(0).getAsJsonObject();
+//
+//						//Log.d(TAG, "headerID:" + header.get("top_id_changed"));
+//
+//						m_firstIdChanged = header.get("first_id_changed") != null;
+//						try {
+//							m_firstId = header.get("first_id").getAsInt();
+//						} catch (NumberFormatException e) {
+//							m_firstId = 0;
+//						}
+//
+//						Log.d(TAG, "firstID=" + m_firstId + " firstIdChanged=" + m_firstIdChanged);
+//
+//						Type listType = new TypeToken<List<Article>>() {}.getType();
+//						articles = new Gson().fromJson(content.get(1), listType);
+//					} else {
+//						header = null;
 
 						Type listType = new TypeToken<List<Article>>() {}.getType();
 						articles = new Gson().fromJson(content, listType);
-					}
+//					}
 
 					if (m_offset == 0) {
 						m_articles.clear();

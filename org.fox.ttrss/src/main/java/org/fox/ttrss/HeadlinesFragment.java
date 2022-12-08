@@ -113,7 +113,7 @@ public class HeadlinesFragment extends StateSavedFragment {
 
 	private final String TAG = this.getClass().getSimpleName();
 
-	@State Feed m_feed;
+	@State Feed m_feed; //侧边栏选中的feed
 	@State Article m_activeArticle;
 	@State String m_searchQuery = "";
 	private boolean m_refreshInProgress = false;

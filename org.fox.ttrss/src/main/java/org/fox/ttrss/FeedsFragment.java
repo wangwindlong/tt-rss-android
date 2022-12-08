@@ -63,7 +63,7 @@ public class FeedsFragment extends BaseFeedlistFragment implements OnItemClickLi
 	@State Feed m_selectedFeed;
 	@State FeedCategory m_activeCategory;
 	private SwipeRefreshLayout m_swipeLayout;
-    @State boolean m_enableParentBtn = false;
+    @State boolean m_enableParentBtn = false; //是否显示上一层级按钮
     private ListView m_list;
 
     public void initialize(FeedCategory cat, boolean enableParentBtn) {
